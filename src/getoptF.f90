@@ -38,6 +38,7 @@ contains
       character(:),allocatable :: tmp
       call get_command_argument(iarg, length=tmpLen)
       allocate( character(tmpLen) :: tmp )
+      call get_command_argument(iarg, tmp)
       argv(iarg)%content = tmp // C_NULL_CHAR
     end subroutine setargv_nullterminated
     
