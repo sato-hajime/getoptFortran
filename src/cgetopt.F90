@@ -33,8 +33,8 @@ module cgetopt
        implicit none
        integer(c_int)       :: getopt
        integer(c_int),value :: argc
-       type(c_ptr)          :: argv(:)
-       type(c_ptr)          :: optstring
+       type(c_ptr),value    :: argv
+       type(c_ptr),value    :: optstring
      end function getopt
      
      function getopt_long__ &

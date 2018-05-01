@@ -17,16 +17,13 @@ program main
   do iarg = 0, argc
      print '("$", I0, "=''", A, "''")', iarg, argv(iarg)%content
   end do
+
+  print *, "parse command arg"
   
-  do while(.true.)
-     opt = getopt(argc, argv, "abc")
-     print *, opt
+  do while(getopt(argc, argv, "abc", opt))
      select case(opt)
-     case (C_NULL_CHAR)
-        print *, "final"
-        exit
      case default
-        exit
+        print '("-", A)', opt
      end select
   end do
   

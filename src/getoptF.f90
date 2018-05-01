@@ -13,10 +13,8 @@ module getoptF
      character(:,c_char),allocatable :: content
   end type arg
 
+  public :: get_argc_argv, getopt
   
-  
-  public :: get_argc_argv, getopt, C_NULL_CHAR
-
 contains
 
   subroutine get_argc_argv(argc, argv)
@@ -44,23 +42,29 @@ contains
     
   end  subroutine get_argc_argv
 
-  function getopt(argc, argv, optstring)
-    character(1,c_char)                     :: getopt
+  logical function getopt(argc, argv, optstring, opt) result(result)
     integer,intent(in)                      :: argc
     type(arg),target,allocatable,intent(in) :: argv(:)
     character(*)                            :: optstring
+    character(1,c_char),intent(out)         :: opt
+
     type(c_ptr),allocatable                 :: c_argv(:)
-    
     character(len_trim(optstring)+1,c_char),target :: c_optstring
     
-    integer iarg
+    integer iarg, ichar
+
+    c_optstring = optstring // C_NULL_CHAR
     
     allocate( c_argv(0:argc) )
     do iarg = 0, argc
        c_argv(iarg) = c_loc(argv(iarg)%content)
     end do
-   
-    print *, c_getopt(argc, c_argv, c_loc(c_optstring))
+    
+    ichar = c_getopt(argc, c_argv, c_loc(c_optstring))
+
+    opt = ACHAR(ichar)
+
+    result = ichar > 0
     
   end function getopt
   
