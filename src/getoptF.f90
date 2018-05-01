@@ -2,7 +2,7 @@
 module getoptF
 
   use iso_c_binding
-  use cgetopt, only : c_getopt => getopt
+  use cgetopt_interface, only : c_getopt => getopt
 
   implicit none
   

@@ -1,5 +1,5 @@
 
-module cgetopt
+module cgetopt_interface
 
   use iso_c_binding
 
@@ -33,38 +33,38 @@ module cgetopt
        implicit none
        integer(c_int)       :: getopt
        integer(c_int),value :: argc
-       type(c_ptr),value    :: argv
+       type(c_ptr)          :: argv(0:argc)
        type(c_ptr),value    :: optstring
      end function getopt
      
-     function getopt_long__ &
+     function getopt_long &
           (argc, argv, optstring, longopts, longindex) &
           bind(C, name="getopt_long")
        import c_int, c_ptr
        implicit none
-       integer(c_int)       :: getopt_long__
+       integer(c_int)       :: getopt_long
        integer(c_int),value :: argc
-       type(c_ptr)          :: argv(:)
+       type(c_ptr)          :: argv(0:argc)
        type(c_ptr),value    :: optstring
        type(c_ptr),value    :: longopts
        integer(c_int)       :: longindex
-     end function getopt_long__
+     end function getopt_long
 
-     function getopt_long_only__ &
+     function getopt_long_only &
           (argc, argv, optstring, longopts, longindex) &
           bind(C, name="getopt_long")
        import c_int, c_ptr
        implicit none
-       integer(c_int)       :: getopt_long_only__
+       integer(c_int)       :: getopt_long_only
        integer(c_int),value :: argc
        type(c_ptr)          :: argv(:)
        type(c_ptr),value    :: optstring
        type(c_ptr),value    :: longopts
        integer(c_int)       :: longindex
-     end function getopt_long_only__
+     end function getopt_long_only
      
   end interface
 
 contains
     
-end module cgetopt
+end module cgetopt_interface
