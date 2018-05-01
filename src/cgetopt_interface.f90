@@ -12,10 +12,10 @@ module cgetopt_interface
      integer(c_int) :: val
   end type struct_option
   
-  type(c_ptr)   ,bind(c) :: optarg
-  integer(c_int),bind(c) :: optind
-  integer(c_int),bind(c) :: opterr
-  integer(c_int),bind(c) :: optopt
+  type(c_ptr)   ,bind(c) :: optarg = C_NULL_PTR
+  integer(c_int),bind(c) :: optind =  1
+  integer(c_int),bind(c) :: opterr =  1
+  integer(c_int),bind(c) :: optopt = -1
   
   interface
      
@@ -33,7 +33,7 @@ module cgetopt_interface
        implicit none
        integer(c_int)       :: getopt
        integer(c_int),value :: argc
-       type(c_ptr)          :: argv(0:argc)
+       type(c_ptr)          :: argv(argc)
        type(c_ptr),value    :: optstring
      end function getopt
      
@@ -44,7 +44,7 @@ module cgetopt_interface
        implicit none
        integer(c_int)       :: getopt_long
        integer(c_int),value :: argc
-       type(c_ptr)          :: argv(0:argc)
+       type(c_ptr)          :: argv(argc)
        type(c_ptr),value    :: optstring
        type(c_ptr),value    :: longopts
        integer(c_int)       :: longindex
@@ -57,7 +57,7 @@ module cgetopt_interface
        implicit none
        integer(c_int)       :: getopt_long_only
        integer(c_int),value :: argc
-       type(c_ptr)          :: argv(:)
+       type(c_ptr)          :: argv(argc)
        type(c_ptr),value    :: optstring
        type(c_ptr),value    :: longopts
        integer(c_int)       :: longindex

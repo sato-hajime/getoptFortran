@@ -9,7 +9,13 @@ add_library(getoptF
 add_executable(test_getoptF
   test_getoptF.f90
   )
-
 target_link_libraries(test_getoptF
+  getoptF
+  )
+
+add_executable(test_getoptF_2
+  test_getoptF_2.f90
+  )
+target_link_libraries(test_getoptF_2
   getoptF
   )
