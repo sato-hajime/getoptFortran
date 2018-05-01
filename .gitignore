@@ -31,9 +31,9 @@
 *.out
 *.app
 
-# build directory
+# Build directory
 *build*/
 
-# backup files
+# Backup files
 \#*
 *~

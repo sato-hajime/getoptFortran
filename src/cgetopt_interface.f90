@@ -19,13 +19,6 @@ module cgetopt_interface
   
   interface
      
-     function strlen(s) bind(C, name="strlen")
-       import c_size_t, c_ptr
-       implicit none
-       integer(c_size_t) :: strlen
-       type(c_ptr),value :: s
-     end function strlen
-     
      function getopt &
           (argc, argv, optstring) &
           bind(C, name="getopt")
@@ -64,7 +57,5 @@ module cgetopt_interface
      end function getopt_long_only
      
   end interface
-
-contains
-    
+  
 end module cgetopt_interface
